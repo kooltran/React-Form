@@ -24,7 +24,7 @@ const Password = mycombinator(t.String, function(value) {
     (!value && 'This field is required!') ||
     (!passRegex.test(value) && 'Password is invalid')
   );
-}, 'Age');
+}, 'Password');
 
 const FormSchema = t.struct({
   name: Username,
