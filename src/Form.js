@@ -34,10 +34,19 @@ const FormSchema = t.struct({
 const options = {
   fields: {
     name: {
-      error: Username.getError
+      error: Username.getError,
+      attrs: {
+        placeholder: 'please enter your username...',
+        className: 'input-name',
+      }
     },
     password: {
-      error: Password.getError
+      error: Password.getError,
+      type: 'password',
+      attrs: {
+        placeholder: 'please enter your password...',
+        className: 'input-pass',
+      }
     }
   }
 }
