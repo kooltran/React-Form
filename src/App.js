@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Form from './Form.js';
+import RegisterForm from './components/RegisterForm';
+import Nav from './components/Nav';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Form />
+        <Nav />
       </div>
     );
   }
