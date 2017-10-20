@@ -4,13 +4,12 @@ import Login from './Login';
 import Account from './Account';
 import Home from './Home';
 import PrivateRoute from './PrivateRoute';
-import AuthButton from './AuthButton';
+// import AuthButton from './AuthButton';
 import {
   BrowserRouter as Router,
   Route,
   Link,
   Switch,
-  Redirect,
 } from 'react-router-dom';
 
 export default class Nav extends Component {

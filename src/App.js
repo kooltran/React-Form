@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import RegisterForm from './components/RegisterForm';
 import Nav from './components/Nav';
 
 class App extends Component {

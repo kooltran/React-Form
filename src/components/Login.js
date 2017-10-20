@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import FakeAuth from './FakeAuth';
+import { request, setLocalStorageItem, getLocalStorageItem } from './helpers';
 import t from 'tcomb-form';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const Form = t.form.Form;
 
@@ -28,7 +23,7 @@ const Username = mycombinator(t.String, (value) => {
 }, 'Username');
 
 const Password = mycombinator(t.String, (value) => {
-  const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g;
+  const passRegex = /^[a-zA-Z]/;
   return (
     (!value && 'This field is required!') ||
     (!passRegex.test(value) && 'Password is invalid')
@@ -80,9 +75,22 @@ export default class Login extends Component {
     e.preventDefault();
     const value = this.refs.form.getValue();
     if (value) {
-      FakeAuth.authenticate(() => {
-        this.setState({ redirectToReferrrer: true })
-      })
+      const postData = {
+        body: JSON.stringify({
+          username: value.name,
+          password: value.password
+        })
+      }
+
+      // TODO const url
+      request('https://express-auth-crud-api.herokuapp.com/login', 'post', postData)
+        .then(res => {
+          // if (res.success)
+          const token = 'dsjkahd';
+          setLocalStorageItem('token', token)
+          console.log(getLocalStorageItem('token'))
+        })
+        .catch(err => console.log(err));
     }
   }
 
