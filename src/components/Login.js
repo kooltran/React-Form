@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import FakeAuth from './FakeAuth';
-import { request, setLocalStorageItem, getLocalStorageItem } from './helpers';
+import { request, setLocalStorageItem } from './helpers';
 import t from 'tcomb-form';
 import { Redirect } from 'react-router-dom';
 
@@ -81,21 +80,28 @@ export default class Login extends Component {
           password: value.password
         })
       }
+      const url = 'https://express-auth-crud-api.herokuapp.com/login';
 
       // TODO const url
-      request('https://express-auth-crud-api.herokuapp.com/login', 'post', postData)
+      request(url, 'post', postData)
+        .then(res => res.json())
         .then(res => {
-          // if (res.success)
-          const token = 'dsjkahd';
-          setLocalStorageItem('token', token)
-          console.log(getLocalStorageItem('token'))
+          if (res.success) {
+            const token = res.token;
+            setLocalStorageItem('token', token);
+            this.setState({
+              redirectToReferrrer: true
+            })
+          } else {
+            alert('Your username or password is invalid');
+          }
         })
         .catch(err => console.log(err));
     }
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { from } = this.props.location.state || { from: { pathname: '/account' } };
     const { redirectToReferrrer } = this.state;
 
     if (redirectToReferrrer) {

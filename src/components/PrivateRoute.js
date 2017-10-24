@@ -1,5 +1,5 @@
 import React from 'react';
-import FakeAuth from './FakeAuth';
+import { getLocalStorageItem } from './helpers';
 import {
   Route,
   Redirect,
@@ -7,10 +7,9 @@ import {
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+  const isToken = getLocalStorageItem('token');
   return <Route {...rest} render={props => {
-    // console.log(props.location);
-    console.log(Component);
-    return FakeAuth.isAuthenticated ?
+    return isToken ?
     ( <Component {...props}/> ) :
     (
       <Redirect to={{

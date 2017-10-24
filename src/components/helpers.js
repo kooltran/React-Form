@@ -1,12 +1,3 @@
-// class HelperRouter {
-//   fetchToken() {
-//     return fetch('https://express-auth-crud-api.herokuapp.com/login', {
-//       method: 'get'
-//     })
-//     .then(res => console.log(res));
-//   }
-// }
-
 const headers = new Headers({
   'Content-Type': 'application/json',
   Accept: 'application/json'
@@ -29,5 +20,11 @@ export function setLocalStorageItem(key, value) {
 export function getLocalStorageItem(key) {
   if(localStorage) { // check broweser support
     return localStorage.getItem(key);
+  }
+}
+
+export function clearLocaStorageItem(key) {
+  if(localStorage) {
+    return localStorage.removeItem(key);
   }
 }
