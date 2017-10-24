@@ -7,9 +7,15 @@
 //   }
 // }
 
+const headers = new Headers({
+  'Content-Type': 'application/json',
+  Accept: 'application/json'
+})
+
 export function request(url, method, params) {
   return fetch(url, {
     method,
+    headers,
     ...params
   })
 }
